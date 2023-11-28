@@ -1,4 +1,4 @@
-#similarity index
+# Similarity index
 # seberapa mirip gambar dengan yang dicompare
 # semakin kecil index, semakin mirip
 # semakin tinggi, semakin tidak mirip
@@ -30,7 +30,7 @@ features = []
 #     features.append((img_name, flat_hist))
 
 
-# create a function for extracting feature
+# Create a function for extracting feature
 def get_image_feature(path):
     img_bgr = cv2.imread(path)
     gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
@@ -44,7 +44,6 @@ def get_image_feature(path):
     normalized_hist = cv2.normalize(hist, None)
 
     flat_hist = normalized_hist.flatten()
-
     return flat_hist
 
 
@@ -56,4 +55,23 @@ for file in os.listdir(DATA_PATH):
     feature = get_image_feature(img_path)
     features.append((img_name, feature))
 
-    print(feature, feature.shape)
+# for TARGET folder
+TEST_PATH = 'target\kitkat-1.png'
+test_feature = get_image_feature(TEST_PATH)
+
+# Create a list for showing the result of distance difference
+results = []
+for name, feature in features:
+    distance = euclidean(feature, test_feature)
+    results.append((distance, name))
+
+# Sorting the distance difference
+# the smaller the value, the closer the distance
+# the bigger the value, the further the distance
+results = sorted(results)
+
+
+# Print the image from the closest distance first
+for distance, name in results:
+    print(f"{name}: {distance}")
+    # print(f"{name}: { round(100 - (distance * 100), 2) }%")
