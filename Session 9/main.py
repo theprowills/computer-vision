@@ -46,3 +46,14 @@ def get_image_feature(path):
     flat_hist = normalized_hist.flatten()
 
     return flat_hist
+
+
+# for DATA folder
+for file in os.listdir(DATA_PATH):
+    img_path = DATA_PATH + "/" + file
+    img_name = file.split(".")[0]
+
+    feature = get_image_feature(img_path)
+    features.append((img_name, feature))
+
+    print(feature, feature.shape)
