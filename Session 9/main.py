@@ -75,3 +75,25 @@ results = sorted(results)
 for distance, name in results:
     print(f"{name}: {distance}")
     # print(f"{name}: { round(100 - (distance * 100), 2) }%")
+
+
+# Creatiing a plot for showing the top 3 most similar image (manually)
+fig = plt.figure()
+
+plt.subplot(3, 3, 1)
+img_rgb = cv2.imread("data\kitkat-1.jpg")
+warna = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2RGB)
+plt.imshow(warna)
+
+plt.subplot(3, 3, 2)
+img_rgb = cv2.imread("data\kitkat-2.jpg")
+warna = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2RGB)
+plt.imshow(warna)
+
+
+plt.subplot(3, 3, 3)
+img_rgb = cv2.imread("data\silverqueen-3.png")
+warna = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2RGB)
+plt.imshow(warna)
+
+plt.show()
